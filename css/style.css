@@ -1,1 +1,73 @@
+:root{
+  --night:#1d1536; --plum:#2c1f55; --rose:#ff7aa8; --peach:#ffc9a8;
+  --mist:#b9a7ff; --paper:#fff8fb;
+  --radius:22px;
+  --font:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Noto Sans JP",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:var(--night);color:var(--paper);font-family:var(--font);overflow:hidden}
+#app{position:relative;height:100%;width:100%;overflow:hidden}
 
+.screen{
+  position:absolute;inset:0;display:none;flex-direction:row;align-items:center;justify-content:space-between;gap:5vw;
+  padding:calc(env(safe-area-inset-top,0px) + 16px) calc(env(safe-area-inset-right,0px) + 5vw) calc(env(safe-area-inset-bottom,0px) + 16px) calc(env(safe-area-inset-left,0px) + 5vw);
+  background:
+    radial-gradient(80% 120% at 25% 0%,#5a3a8f 0%,transparent 70%),
+    linear-gradient(135deg,var(--plum) 0%,var(--night) 100%);
+}
+.screen.active{display:flex}
+
+.hero{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;justify-content:center;text-align:left}
+.portraits{order:3;display:flex;align-items:flex-end;gap:2.2vh;height:22vh;margin-top:3vh}
+.portrait{
+  width:11vh;max-width:64px;border-radius:40px 40px 18px 18px;
+  background:linear-gradient(180deg,var(--c),color-mix(in srgb,var(--c) 30%,var(--night)));
+  box-shadow:0 10px 30px color-mix(in srgb,var(--c) 45%,transparent);
+  display:flex;align-items:flex-start;justify-content:center;padding-top:1.6vh;
+  font-weight:700;font-size:22px;color:rgba(255,255,255,.85);
+}
+.portrait:nth-child(1){height:14vh}
+.portrait:nth-child(2){height:22vh}
+.portrait:nth-child(3){height:18vh}
+.portrait:nth-child(4){height:12vh}
+
+.title{font-size:clamp(40px,17vh,84px);line-height:.95;font-weight:700;letter-spacing:.02em;
+  background:linear-gradient(180deg,#fff,var(--peach) 60%,var(--rose));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.tagline{margin-top:16px;font-size:15px;line-height:1.5;color:var(--mist);max-width:30ch}
+
+.menu{position:relative;z-index:1;display:flex;flex-direction:column;gap:12px;width:min(340px,38vw);flex-shrink:0}
+.menu-row{display:flex;gap:12px}
+.btn{
+  width:100%;min-height:52px;padding:0 20px;border:1.5px solid rgba(255,255,255,.18);border-radius:var(--radius);
+  background:rgba(255,255,255,.06);color:var(--paper);font:500 17px var(--font);cursor:pointer;
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:transform .12s,background .12s;
+}
+.btn:active{transform:scale(.97);background:rgba(255,255,255,.14)}
+.btn:focus-visible{outline:3px solid var(--peach);outline-offset:2px}
+.btn-primary{background:linear-gradient(135deg,var(--rose),#ff9a8b);border:none;color:#3a1230;font-weight:700;font-size:18px;
+  box-shadow:0 8px 24px rgba(255,122,168,.4)}
+.btn-primary:active{background:linear-gradient(135deg,var(--rose),#ff9a8b)}
+.btn-small{min-height:48px;font-size:15px}
+.btn:disabled{opacity:.4;pointer-events:none}
+
+.version{position:absolute;z-index:1;right:calc(env(safe-area-inset-right,0px) + 14px);bottom:calc(env(safe-area-inset-bottom,0px) + 6px);font-size:12px;color:rgba(255,255,255,.4)}
+
+.petals{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.petal{position:absolute;top:-30px;width:12px;height:16px;border-radius:12px 0 12px 0;
+  background:var(--rose);opacity:.55;animation:fall linear infinite}
+@keyframes fall{to{transform:translate(var(--drift),110vh) rotate(540deg)}}
+
+.toast{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 24px);transform:translate(-50%,20px);
+  padding:12px 20px;border-radius:999px;background:var(--paper);color:var(--night);font-size:14px;font-weight:500;
+  opacity:0;pointer-events:none;transition:.25s;z-index:10;white-space:nowrap}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* Invite à tourner l'appareil */
+.rotate{position:absolute;inset:0;z-index:20;display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px;
+  background:var(--night);text-align:center;padding:24px;font-size:17px}
+.rotate span{font-size:48px;animation:tilt 2s ease-in-out infinite}
+@keyframes tilt{50%{transform:rotate(-90deg)}}
+@media (orientation:portrait){.rotate{display:flex}}
+@media (max-height:360px){.btn{min-height:44px;font-size:15px}.btn-primary{font-size:16px}.menu{gap:8px}.tagline{display:none}}
+@media (prefers-reduced-motion:reduce){.petal,.rotate span{animation:none}.btn{transition:none}}
