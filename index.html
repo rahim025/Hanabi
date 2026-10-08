@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#1d1536">
+<title>Hanabi Heart</title>
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- Écran d'accueil -->
+  <section class="screen" id="screen-home" data-screen="home">
+    <div class="petals" aria-hidden="true"></div>
+
+    <div class="hero">
+      <div class="portraits" id="portraits" aria-hidden="true"></div>
+      <h1 class="title">Hanabi<br>Heart</h1>
+      <p class="tagline">Un été, quatre cœurs, une seule étincelle.</p>
+    </div>
+
+    <nav class="menu">
+      <button class="btn btn-primary" data-action="new">Nouvelle partie</button>
+      <button class="btn" data-action="continue" id="btn-continue">Continuer</button>
+      <div class="menu-row">
+        <button class="btn btn-small" data-action="characters">Personnages</button>
+        <button class="btn btn-small" data-action="settings">Réglages</button>
+      </div>
+    </nav>
+
+    <p class="version" id="version"></p>
+  </section>
+
+  <!-- Les autres écrans (histoire, personnages, réglages) seront ajoutés ici -->
+
+  <div class="rotate"><span>📱</span><p>Tourne ton téléphone<br>pour jouer en paysage</p></div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</div>
+
+<script src="js/data/characters.js"></script>
+<script src="js/core/screens.js"></script>
+<script src="js/core/save.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
